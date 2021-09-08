@@ -6,13 +6,13 @@ namespace EntendendoPOO.Models
 {
     class Produto
     {
-        public int Id;
-        public string Nome;
-        public string Descricao;
-        public double Peso;
-        public double Valor;
+        public int Id { get; set; }
+        public string Nome { get; set; }
+        public string Descricao { get; set; }
+        public double Peso { get; set; }
+        public double Valor { get; set; }
         public DateTime Validade { get; private set; }
-        public string Tipo;
+        public string Tipo { get; set; }
 
         public Produto()
         {
