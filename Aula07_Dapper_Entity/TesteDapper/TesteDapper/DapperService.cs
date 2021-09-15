@@ -36,6 +36,14 @@ namespace TesteDapper
 
         public void Incluir()
         {
+            Console.WriteLine($"Digite o Nome do novo Aluno: ");
+            var nome = Console.ReadLine();
+
+            Console.WriteLine($"Digite a Data de Nascimento do novo Aluno (dd/mm/yyyy):");
+            var dataNasc = DateTime.Parse(Console.ReadLine());
+
+            Aluno = new Aluno(nome, dataNasc);
+
             using (var db = new SqlConnection(Conexao))
             {
 
@@ -58,6 +66,17 @@ namespace TesteDapper
 
         public void Atualizar()
         {
+            Console.WriteLine("Digite o Id do Aluno a ser alterado: ");
+            var id = int.Parse(Console.ReadLine());
+
+            Console.WriteLine($"Digite o novo Nome do Aluno (ID {id}): ");
+            var nomeAluno = Console.ReadLine();
+
+            Console.WriteLine($"Digite a nova Data de Nascimento do Aluno (ID {id}) (dd/mm/yyyy):");
+            var dataNasc = DateTime.Parse(Console.ReadLine());
+
+            Aluno = new Aluno(id, nomeAluno, dataNasc);
+
             using (var db = new SqlConnection(Conexao))
             {
                 try
@@ -78,12 +97,15 @@ namespace TesteDapper
 
         public void Deletar()
         {
+            Console.WriteLine("Digite o Id do Aluno a ser deletado: ");
+            var id = int.Parse(Console.ReadLine());
+
             using (var db = new SqlConnection(Conexao))
             {
                 try
                 {
                     db.Open();
-                    var query = @"Delete from TB_ALUNO Where ID=" + Aluno.Id;
+                    var query = @"Delete from TB_ALUNO Where ID=" + id;
                     db.Execute(query);
 
                     Console.WriteLine($"Aluno excluido com sucesso");
