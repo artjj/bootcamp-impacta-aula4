@@ -4,14 +4,16 @@ using ExercicioEF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExercicioEF.Migrations
 {
     [DbContext(typeof(ExercicioEFDbContext))]
-    partial class ExercicioEFDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210920191123_Create_Table_Cargo")]
+    partial class Create_Table_Cargo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,60 +61,6 @@ namespace ExercicioEF.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TB_USER");
-                });
-
-            modelBuilder.Entity("ExercicioEF.Models.User_Cargo", b =>
-                {
-                    b.Property<int>("Id_User_Cargo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID_USER_CARGO")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Id_Cargo")
-                        .HasColumnType("int")
-                        .HasColumnName("ID_CARGO");
-
-                    b.Property<int>("Id_User")
-                        .HasColumnType("int")
-                        .HasColumnName("ID_USER");
-
-                    b.HasKey("Id_User_Cargo");
-
-                    b.HasIndex("Id_Cargo");
-
-                    b.HasIndex("Id_User");
-
-                    b.ToTable("TB_USER_CARGO");
-                });
-
-            modelBuilder.Entity("ExercicioEF.Models.User_Cargo", b =>
-                {
-                    b.HasOne("ExercicioEF.Models.Cargo", "Cargo")
-                        .WithMany("User_Cargo")
-                        .HasForeignKey("Id_Cargo")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ExercicioEF.Models.User", "User")
-                        .WithMany("UserCargo")
-                        .HasForeignKey("Id_User")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cargo");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("ExercicioEF.Models.Cargo", b =>
-                {
-                    b.Navigation("User_Cargo");
-                });
-
-            modelBuilder.Entity("ExercicioEF.Models.User", b =>
-                {
-                    b.Navigation("UserCargo");
                 });
 #pragma warning restore 612, 618
         }

@@ -16,5 +16,6 @@ namespace ExercicioEF.Models
         [Column("DESC_CARGO", TypeName = "VARCHAR(50)")]
         public string DescricaoCargo { get; set; }
 
+        public ICollection<User_Cargo> User_Cargo { get; set; }
     }
 }

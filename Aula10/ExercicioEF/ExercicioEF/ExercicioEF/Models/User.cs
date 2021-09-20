@@ -22,10 +22,6 @@ namespace ExercicioEF.Models
         [Column("DS_CPF", TypeName = "VARCHAR(11)")]
         public string Cpf { get; set; }
 
-        [Column("ID_CARGO_USER")]
-        public int IdCargo { get; set; }
-
-        [ForeignKey("IdCargo")]
-        public virtual Cargo Cargo { get; set; }
+        public ICollection<User_Cargo> UserCargo { get; set; }
     }
 }
