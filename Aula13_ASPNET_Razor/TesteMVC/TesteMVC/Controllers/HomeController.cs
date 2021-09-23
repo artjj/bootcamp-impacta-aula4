@@ -23,9 +23,17 @@ namespace TesteMVC.Controllers
             return View();
         }
 
+        public IActionResult Index2()
+        {
+            var now = DateTime.Now;
+            var model = new Index2Model() { Message = $"Data do servidor é: {now.ToShortDateString()}" };
+            return View(model);
+        }
+
         public IActionResult Privacy()
         {
-            return View();
+            var model = new Index2Model() { Message = $"Termos de privacidade" };
+            return View(model);
         }
 
         public IActionResult HelloWorld()
