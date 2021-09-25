@@ -18,41 +18,56 @@ namespace ProdutosEF
         {
             try
             {
-                Console.WriteLine("Informe qual operacao voce quer realizar no banco: (" +
-                    "1 - listar produtos, " +
-                    "2 - criar venda, " +
-                    "3 - obter vendas por usuario " +
-                    "4 - total de itens vendidos do produto)");
-                var opcaoStr = Console.ReadLine();
-                var opcao = int.Parse(opcaoStr);
-
-                using (var context = new ProdutosEFDBContext())
+                bool boolOp = false;
+                do
                 {
-                    _produtoRepository = new ProdutoRepositoryImpl(context);
-                    _vendaItemRepository = new VendaItemRepositoryImpl(context);
-                    _vendaRepository = new VendaRepositoryImpl(context);
-                    _usuarioRepository = new UsuarioRepositoryImpl(context);
 
-                    switch (opcao)
+
+                    Console.WriteLine("Informe qual operacao voce quer realizar no banco: (" +
+                        "1 - listar produtos, " +
+                        "2 - criar venda, " +
+                        "3 - obter vendas por usuario " +
+                        "4 - total de itens vendidos do produto)");
+                    var opcaoStr = Console.ReadLine();
+                    var opcao = int.Parse(opcaoStr);
+
+                    using (var context = new ProdutosEFDBContext())
                     {
-                        case 1:
-                            var produtos = _produtoRepository.ObterProdutos();
-                            ExibirProdutos(produtos);
-                            break;
-                        case 2:
-                            SolicitarProdutosEUsuario();
-                            break;
-                        case 3:
-                            ObterVendasPorUsuario();
-                            break;
-                        case 4:
-                            ObterItensPorProduto();
-                            break;
-                        default:
-                            Console.WriteLine("Opcao informada nao e valida, tente novamente!");
-                            break;
+                        _produtoRepository = new ProdutoRepositoryImpl(context);
+                        _vendaItemRepository = new VendaItemRepositoryImpl(context);
+                        _vendaRepository = new VendaRepositoryImpl(context);
+                        _usuarioRepository = new UsuarioRepositoryImpl(context);
+
+                        switch (opcao)
+                        {
+                            case 1:
+                                var produtos = _produtoRepository.ObterProdutos();
+                                ExibirProdutos(produtos);
+                                break;
+                            case 2:
+                                SolicitarProdutosEUsuario();
+                                break;
+                            case 3:
+                                ObterVendasPorUsuario();
+                                break;
+                            case 4:
+                                ObterItensPorProduto();
+                                break;
+                            default:
+                                Console.WriteLine("Opcao informada nao e valida, tente novamente!");
+                                break;
+                        }
                     }
-                }
+                    Console.WriteLine("Deseja realizar mais operações? (S/N)");
+                    string strOp = Console.ReadLine();
+
+                    if (strOp.ToUpper() == "S" || strOp.ToUpper() == "SIM")
+                    {
+                        boolOp = true;
+                    }
+                    else { boolOp = false; }
+
+                } while (boolOp);
             }
             catch (ArgumentException e)
             {
