@@ -73,7 +73,7 @@ namespace Teste_Scaffold_MVC.Controllers
         }
 
         // GET: Movies/Edit/5
-        [Route("Edit")]
+        [Route("Edit/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -94,7 +94,7 @@ namespace Teste_Scaffold_MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("Edit")]
+        [Route("Edit/{id}")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Genre,ReleaseDate,Price")] Movie movie)
         {
             if (id != movie.Id)
@@ -126,7 +126,7 @@ namespace Teste_Scaffold_MVC.Controllers
         }
 
         // GET: Movies/Delete/5
-        [Route("Delete")]
+        [Route("Delete/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -147,7 +147,7 @@ namespace Teste_Scaffold_MVC.Controllers
         // POST: Movies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Route("Delete")]
+        [Route("Delete/{id}")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var movie = await _context.Movie.FindAsync(id);
