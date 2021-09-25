@@ -1,0 +1,34 @@
+﻿using Microsoft.EntityFrameworkCore;
+using ProdutosEF.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProdutosEF.Repositories
+{
+    class ProdutosEFDBContext : DbContext
+    {
+        public DbSet<Produto> Produto { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Venda> Venda { get; set; }
+        public DbSet<VendaItem> VendaItem { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlServer("data source=DESKTOP-J0917JE\\SQLEXPRESS;initial catalog=TESTE_SCAFFOLD_MVC;trusted_connection=true");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+        }
+    }
+}
