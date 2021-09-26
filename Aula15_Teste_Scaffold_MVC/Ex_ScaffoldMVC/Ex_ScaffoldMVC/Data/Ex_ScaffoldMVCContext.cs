@@ -17,5 +17,7 @@ namespace Ex_ScaffoldMVC.Data
         public DbSet<Ex_ScaffoldMVC.Models.Produto> Produto { get; set; }
 
         public DbSet<Ex_ScaffoldMVC.Models.Usuario> Usuario { get; set; }
+        public DbSet<Ex_ScaffoldMVC.Models.Venda> Venda { get; set; }
+        public DbSet<Ex_ScaffoldMVC.Models.VendaItem> VendaItem { get; set; }
     }
 }

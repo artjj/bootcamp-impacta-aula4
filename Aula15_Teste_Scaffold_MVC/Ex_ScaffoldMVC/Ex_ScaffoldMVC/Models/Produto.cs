@@ -17,12 +17,12 @@ namespace Ex_ScaffoldMVC.Models
         [Column("NM_PRODUTO", TypeName = "VARCHAR(100)")]
         public string Nome { get; set; }
 
-        [Column("VLR_PRODUTO")]
+        [Column("VLR_PRODUTO", TypeName = "decimal(10,2)")]
         public decimal Valor { get; set; }
 
         [Column("DT_VALIDADE")]
         public DateTime Validade { get; set; }
 
-        //public virtual ICollection<VendaItem> ItensDoProdutoVendido { get; set; }
+        public virtual ICollection<VendaItem> ItensDoProdutoVendido { get; set; }
     }
 }

@@ -28,7 +28,7 @@ namespace Ex_ScaffoldMVC
             services.AddControllersWithViews();
 
             services.AddDbContext<Ex_ScaffoldMVCContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("Ex_ScaffoldMVCContext")));
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,9 +53,8 @@ namespace Ex_ScaffoldMVC
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
+                    
             });
         }
     }

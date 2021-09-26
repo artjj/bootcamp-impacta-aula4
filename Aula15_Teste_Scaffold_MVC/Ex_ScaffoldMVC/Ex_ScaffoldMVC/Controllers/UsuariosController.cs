@@ -10,6 +10,8 @@ using Ex_ScaffoldMVC.Models;
 
 namespace Ex_ScaffoldMVC.Controllers
 {
+    [Controller]
+    [Route("[controller]")]
     public class UsuariosController : Controller
     {
         private readonly Ex_ScaffoldMVCContext _context;
@@ -26,6 +28,7 @@ namespace Ex_ScaffoldMVC.Controllers
         }
 
         // GET: Usuarios/Details/5
+        [Route("{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +47,7 @@ namespace Ex_ScaffoldMVC.Controllers
         }
 
         // GET: Usuarios/Create
+        [Route("Create")]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +58,7 @@ namespace Ex_ScaffoldMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Create")]
         public async Task<IActionResult> Create([Bind("Id,Nome")] Usuario usuario)
         {
             if (ModelState.IsValid)
@@ -66,6 +71,7 @@ namespace Ex_ScaffoldMVC.Controllers
         }
 
         // GET: Usuarios/Edit/5
+        [Route("Edit/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +92,7 @@ namespace Ex_ScaffoldMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Edit/{id}")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] Usuario usuario)
         {
             if (id != usuario.Id)
@@ -117,6 +124,7 @@ namespace Ex_ScaffoldMVC.Controllers
         }
 
         // GET: Usuarios/Delete/5
+        [Route("Delete/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,6 +145,7 @@ namespace Ex_ScaffoldMVC.Controllers
         // POST: Usuarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("Delete/{id}")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var usuario = await _context.Usuario.FindAsync(id);

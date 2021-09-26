@@ -17,6 +17,6 @@ namespace Ex_ScaffoldMVC.Models
         [Column("NM_USUARIO", TypeName = "VARCHAR(100)")]
         public string Nome { get; set; }
 
-        //public virtual ICollection<Venda> Vendas { get; set; }
+        public virtual ICollection<Venda> Vendas { get; set; }
     }
 }
