@@ -40,6 +40,7 @@ namespace TodoAPI
             });
 
             services.AddScoped<TodoItemRepository, TodoItemRepositoryImpl>();
+            services.AddScoped<ITeste, ITesteImpl>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

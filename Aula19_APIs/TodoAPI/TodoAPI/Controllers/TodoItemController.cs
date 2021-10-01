@@ -16,17 +16,19 @@ namespace TodoAPI.Controllers
     public class TodoItemController : ControllerBase
     {
         private readonly TodoItemRepository _todoItemRepository;
+        private readonly ITeste _teste;
 
-        public TodoItemController(TodoItemRepository todoItemRepository)
+        public TodoItemController(TodoItemRepository todoItemRepository, ITeste teste)
         {
             _todoItemRepository = todoItemRepository;
+            _teste = teste;
         }
 
         // GET: api/TodoItem
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TodoItem>>> GettodoItem()
         {
-            
+            _teste.Mensagem();
             return await _todoItemRepository.Listar();
         }
 
