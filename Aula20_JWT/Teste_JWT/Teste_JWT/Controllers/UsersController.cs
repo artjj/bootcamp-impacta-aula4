@@ -86,6 +86,7 @@ namespace Teste_JWT.Controllers
             return NoContent();
         }
 
+        // POST: api/Users/register
         [HttpPost("register")]
         [AllowAnonymous]
         public async Task<ActionResult<User>> CadastroPublico(SalvarUsuarioDto dto)
@@ -106,7 +107,7 @@ namespace Teste_JWT.Controllers
             _context.User.Add(usuario);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUsuario", new { id = usuario.Id }, usuario);
+            return CreatedAtAction("CadastroPublico", new { id = usuario.Id }, usuario);
         }
 
         // POST: api/Users
@@ -136,7 +137,7 @@ namespace Teste_JWT.Controllers
 
             if (logged != null && logged.Profile == "ADMIN")
             {
-                user.Profile = dto.Password;
+                user.Profile = dto.Profile;
             }
             else
             {
@@ -151,6 +152,7 @@ namespace Teste_JWT.Controllers
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> DeleteUser(int id)
         {
             User user = await _context.User.FindAsync(id);
