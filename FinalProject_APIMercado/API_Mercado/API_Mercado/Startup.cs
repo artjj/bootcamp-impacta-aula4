@@ -11,6 +11,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using API_Mercado.Data;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace API_Mercado
 {
@@ -31,6 +36,29 @@ namespace API_Mercado
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API_Mercado", Version = "v1" });
+            });
+
+            services.AddDbContext<API_MercadoContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("API_MercadoContext")));
+
+            byte[] keyInBytes = Encoding.ASCII.GetBytes(Secret.Key);
+            services.AddAuthentication(auth =>
+            {
+
+                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(auth =>
+            {
+                auth.RequireHttpsMetadata = false;
+                auth.SaveToken = true;
+                auth.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(keyInBytes),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
             });
         }
 
